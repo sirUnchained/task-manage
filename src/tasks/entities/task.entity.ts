@@ -1,8 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import taskStatus from '../enums/status.enum';
+import { Projects } from 'src/projects/entities/project.entity';
 
 @Entity()
-export class Task {
+export class Tasks {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -15,6 +22,6 @@ export class Task {
   @Column({ type: 'enum', enum: taskStatus })
   status: taskStatus;
 
-  @Column()
-  project_id: number;
+  @ManyToOne(() => Projects, (project) => project.tasks)
+  project: Projects;
 }
