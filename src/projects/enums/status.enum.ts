@@ -1,6 +1,6 @@
-enum statusEnum {
+enum projectStatus {
   enable = 'enable',
   disable = 'disable',
 }
 
-export default statusEnum;
+export default projectStatus;
