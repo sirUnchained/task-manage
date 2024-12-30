@@ -1,9 +1,9 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import projectStatus from '../enums/status.enum';
-import { Tasks } from 'src/tasks/entities/task.entity';
+import { TasksEntity } from 'src/tasks/entities/task.entity';
 
 @Entity()
-export class Projects {
+export class ProjectsEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -13,6 +13,6 @@ export class Projects {
   @Column({ type: 'enum', enum: projectStatus, default: projectStatus.enable })
   status: projectStatus;
 
-  @OneToMany(() => Tasks, (task) => task.project)
-  tasks: Tasks[];
+  @OneToMany(() => TasksEntity, (task) => task.project)
+  tasks: TasksEntity[];
 }

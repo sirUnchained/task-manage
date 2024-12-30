@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ProjectsModule } from './projects/projects.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Projects } from './projects/entities/project.entity';
+import { ProjectsEntity } from './projects/entities/project.entity';
 import { TasksModule } from './tasks/tasks.module';
+import { TasksEntity } from './tasks/entities/task.entity';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { TasksModule } from './tasks/tasks.module';
       username: 'postgres',
       password: '11111111',
       database: 'task_manage',
-      entities: [Projects],
+      entities: [ProjectsEntity, TasksEntity],
       synchronize: true,
     }),
     TasksModule,
