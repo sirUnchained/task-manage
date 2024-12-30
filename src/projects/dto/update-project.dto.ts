@@ -4,12 +4,12 @@ import { IsEnum, IsNotEmpty, IsString, Length } from 'class-validator';
 import projectStatus from '../enums/status.enum';
 
 export class UpdateProjectDto {
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'نام پروژه الزامی است.' })
   @IsString()
-  @Length(0, 30)
+  @Length(0, 30, { message: 'نام پروژه باین بین ۰ تا ۳۰ کاراکتر باشد.' })
   title: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({ message: 'وضعیت پروژه الزامی است.' })
   @IsEnum(projectStatus)
   status: projectStatus;
 }

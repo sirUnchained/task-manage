@@ -3,17 +3,17 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
   Put,
-  ValidationPipe,
+  Res,
 } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import projectStatus from './enums/status.enum';
+import { Response } from 'express';
 
 @Controller('projects')
 export class ProjectsController {
@@ -26,11 +26,13 @@ export class ProjectsController {
 
   @Get()
   findAll(
+    @Res() res: Response,
     @Body('status') status: projectStatus,
     @Query('page') page?: string,
     @Query('limit') limit?: string,
   ) {
-    return this.projectsService.findAll(+page, +limit, status);
+    const result = this.projectsService.findAll(+page, +limit, status);
+    return res.status(200).json(result);
   }
 
   @Get(':id')
