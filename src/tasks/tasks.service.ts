@@ -1,12 +1,22 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TasksEntity } from './entities/task.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TasksService {
+  constructor(
+    @InjectRepository(TasksEntity)
+    private readonly taskRepo: Repository<TasksEntity>,
+  ) {}
+
   create(createTaskDto: CreateTaskDto) {
     try {
-      // todo
+      // const checkRelatedProject = await this.taskRepo.findOne({
+      //   where: { project: createTaskDto.project },
+      // });
     } catch (error) {
       throw new BadRequestException('error for creating task.');
     }
