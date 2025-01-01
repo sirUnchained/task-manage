@@ -51,17 +51,21 @@ export class TasksService {
 
   async findOne(id: number) {
     if (id) {
-      return await this.taskRepo.findOne({ where: { id } });
+      return await this.taskRepo.findOne({
+        where: { id },
+        relations: ['project'],
+      });
     } else {
       throw new BadRequestException('id is not valid.');
     }
   }
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
+    console.log(updateTaskDto);
     return `This action updates a #${id} task`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} task`;
+    return this.taskRepo.delete({ id });
   }
 }
